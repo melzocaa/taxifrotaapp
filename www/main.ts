@@ -195,20 +195,19 @@ async function abrirCamera(
     const foto = await Camera.getPhoto({
       quality: 60,
       allowEditing: false,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64,
       source: origem
     });
 
-    const caminhoFoto =
-      foto.webPath ??
-      foto.path ??
-      (foto.base64String
-        ? `data:image/jpeg;base64,${foto.base64String}`
-        : null);
+    const formato = foto.format === 'png' ? 'png' : 'jpeg';
+    const imagemBase64 = foto.base64String;
 
-    if (!caminhoFoto) {
+    if (!imagemBase64) {
       throw new Error('Não foi possível acessar a imagem.');
     }
+
+    const caminhoFoto =
+      `data:image/${formato};base64,${imagemBase64}`;
 
     fotoSelecionada = caminhoFoto;
 
