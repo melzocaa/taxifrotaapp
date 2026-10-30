@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#facc15" />
+
+  <title>TaxiFrotaApp | Registro de Hodômetro</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            taxi: {
+              yellow: '#FACC15',
+              dark: '#18181B',
+              gray: '#71717A',
+              light: '#F4F4F5'
+            }
+          },
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            heading: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>*{-webkit-tap-highlight-color:transparent}body{background:#f4f4f5;font-family:DM Sans,sans-serif}.font-heading{font-family:Manrope,sans-serif}.camera-frame{background-image:linear-gradient(45deg,#f4f4f5 25%,#0000 25% 75%,#f4f4f5 75%,#f4f4f5),linear-gradient(45deg,#f4f4f5 25%,#fff 25% 75%,#f4f4f5 75%,#f4f4f5);background-position:0 0,8px 8px;background-size:16px 16px}button{touch-action:manipulation}</style>
+  <script type="module" crossorigin src="./assets/index-CWvvHGZn.js"></script>
+</head>
+
+<body class="min-h-screen text-zinc-900">
+  <div class="mx-auto min-h-screen max-w-md bg-white shadow-xl">
+
+    <!-- Cabeçalho -->
+    <header class="bg-yellow-400 px-6 pb-7 pt-8">
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-950 text-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 17h14l1-5-2-5H6l-2 5 1 5Z"/>
+              <path d="M7 7l1-3h8l1 3"/>
+              <path d="M4 12h16"/>
+              <circle cx="7.5" cy="16" r="1"/>
+              <circle cx="16.5" cy="16" r="1"/>
+              <path d="M9 4h6"/>
+            </svg>
+          </div>
+
+          <div>
+            <h1 class="font-heading text-xl font-extrabold tracking-tight">
+              TaxiFrota<span class="text-zinc-700">App</span>
+            </h1>
+            <p class="text-xs font-semibold text-zinc-700">
+              CONTROLE DE FROTA
+            </p>
+          </div>
+        </div>
+
+        <div class="rounded-full border border-black/10 bg-white/70 px-3 py-1.5">
+          <span class="flex items-center gap-2 text-xs font-bold">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            Registro
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <p class="text-sm font-semibold text-zinc-700">
+          CONTROLE DE QUILOMETRAGEM
+        </p>
+        <h2 class="font-heading mt-1 text-3xl font-extrabold leading-tight">
+          Nova passagem<br />de turno.
+        </h2>
+        <p class="mt-3 max-w-xs text-sm leading-6 text-zinc-700">
+          Fotografe o painel do veículo e registre a quilometragem para manter o controle da frota.
+        </p>
+      </div>
+    </header>
+
+    <main class="space-y-6 px-5 py-6">
+
+      <!-- Instrução -->
+      <section class="flex items-start gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-100 text-zinc-900">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 11v5"/>
+            <path d="M12 8h.01"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-bold">Antes de iniciar</h3>
+          <p class="mt-1 text-sm leading-5 text-zinc-600">
+            Deixe o hodômetro visível e tire uma foto nítida dos números exibidos no painel.
+          </p>
+        </div>
+      </section>
+
+      <!-- Área de imagem -->
+      <section>
+        <div class="mb-3 flex items-center justify-between">
+          <div>
+            <h3 class="font-heading text-lg font-extrabold">
+              Foto do hodômetro
+            </h3>
+            <p class="mt-0.5 text-sm text-zinc-500">
+              Evidência da quilometragem atual
+            </p>
+          </div>
+
+          <span class="rounded-lg bg-yellow-100 px-2.5 py-1 text-xs font-bold text-zinc-800">
+            OBRIGATÓRIO
+          </span>
+        </div>
+
+        <div class="camera-frame relative flex min-h-[250px] items-center justify-center overflow-hidden rounded-2xl border border-zinc-200">
+          <!-- Imagem selecionada -->
+          <img
+            id="imagem-preview"
+            alt="Foto do hodômetro selecionada"
+            class="hidden max-h-[360px] w-full object-contain"
+          />
+
+          <!-- Estado vazio -->
+          <div id="placeholder" class="px-6 py-8 text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-400 text-zinc-950 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 4h-4L8 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2-3Z"/>
+                <circle cx="12" cy="13" r="3.5"/>
+              </svg>
+            </div>
+
+            <h4 class="mt-4 font-heading text-base font-extrabold">
+              Nenhuma foto selecionada
+            </h4>
+            <p class="mx-auto mt-1 max-w-[230px] text-sm leading-5 text-zinc-500">
+              Use a câmera ou escolha uma imagem salva no dispositivo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Status da imagem -->
+        <div class="mt-3 flex items-center justify-between gap-3">
+          <div id="status-preview" class="flex items-center gap-2 text-xs font-semibold text-zinc-500">
+            <span class="h-2 w-2 rounded-full bg-zinc-300"></span>
+            Aguardando imagem
+          </div>
+
+          <button
+            id="botao-remover"
+            type="button"
+            class="hidden text-xs font-bold text-red-600 underline underline-offset-2"
+          >
+            Remover foto
+          </button>
+        </div>
+
+        <p id="legenda-preview" class="hidden mt-2 break-words text-xs text-zinc-500">
+          Confira se a quilometragem está legível.
+        </p>
+      </section>
+
+      <!-- Ações -->
+      <section class="space-y-3">
+        <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+          <div class="mb-3 flex items-center justify-between gap-2">
+            <div>
+              <h3 class="font-heading text-lg font-extrabold">
+                Localização do veículo
+              </h3>
+              <p class="mt-0.5 text-sm text-zinc-500">
+                Captura precisa por GPS do smartphone
+              </p>
+            </div>
+
+            <span class="rounded-lg bg-emerald-100 px-2.5 py-1 text-[11px] font-bold text-emerald-800">
+              GPS
+            </span>
+          </div>
+
+          <div class="space-y-3">
+            <button
+              id="botao-localizacao"
+              type="button"
+              class="flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-4 py-3 font-bold text-white shadow-sm transition hover:bg-emerald-400 active:scale-[0.98]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v2"/>
+                <path d="M12 19v2"/>
+                <path d="M3 12h2"/>
+                <path d="M19 12h2"/>
+                <circle cx="12" cy="12" r="4"/>
+              </svg>
+              Capturar localização
+            </button>
+
+            <div id="status-localizacao" class="flex items-center gap-2 text-xs font-semibold text-zinc-500">
+              <span class="h-2 w-2 rounded-full bg-zinc-300"></span>
+              Aguardando GPS
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-xl border border-zinc-200 bg-white p-3">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-zinc-500">Latitude</p>
+                <p id="latitude-valor" class="mt-2 font-heading text-lg font-extrabold text-zinc-900">--</p>
+              </div>
+
+              <div class="rounded-xl border border-zinc-200 bg-white p-3">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-zinc-500">Longitude</p>
+                <p id="longitude-valor" class="mt-2 font-heading text-lg font-extrabold text-zinc-900">--</p>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-zinc-200 bg-white p-3">
+              <p class="text-[11px] font-bold uppercase tracking-wide text-zinc-500">Precisão</p>
+              <p id="precisao-valor" class="mt-2 font-heading text-lg font-extrabold text-zinc-900">--</p>
+            </div>
+
+            <a
+              id="botao-mapa"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hidden flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 font-bold text-blue-700 transition hover:bg-blue-100"
+            >
+              Abrir no Google Maps
+            </a>
+          </div>
+        </div>
+
+        <button
+          id="botao-camera"
+          type="button"
+          class="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-zinc-950 px-5 py-4 font-bold text-white shadow-sm transition active:scale-[0.98]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h-4L8 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2-3Z"/>
+            <circle cx="12" cy="13" r="3.5"/>
+          </svg>
+          Fotografar painel
+        </button>
+
+        <button
+          id="botao-galeria"
+          type="button"
+          class="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl border-2 border-zinc-200 bg-white px-5 py-4 font-bold text-zinc-800 transition hover:bg-zinc-50 active:scale-[0.98]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          Escolher da galeria
+        </button>
+
+        <button
+            id="botao-enviar"
+            type="button"
+            disabled
+            class="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-yellow-400 px-5 py-4 font-bold text-zinc-950 shadow-sm transition hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 16V4"/>
+        <path d="m7 9 5-5 5 5"/>
+        <path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
+        </svg>
+            Enviar foto para o Supabase
+        </button>
+
+        <p id="mensagem" role="status" aria-live="polite"
+          class="min-h-5 text-center text-sm font-medium text-zinc-600"></p>
+      </section>
+
+      <!-- Orientações -->
+      <section class="rounded-2xl border border-yellow-200 bg-yellow-50 p-4">
+        <h3 class="flex items-center gap-2 text-sm font-extrabold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 2.8 20h18.4L12 3Z"/>
+            <path d="M12 9v4"/>
+            <path d="M12 17h.01"/>
+          </svg>
+          Dicas para um bom registro
+        </h3>
+
+        <ul class="mt-3 space-y-2.5 text-sm leading-5 text-zinc-700">
+          <li class="flex gap-2">
+            <span class="font-bold">01.</span>
+            <span>Certifique-se de que todos os números estejam visíveis.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold">02.</span>
+            <span>Evite reflexos e imagens tremidas.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold">03.</span>
+            <span>Faça o registro a cada troca de turno.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Aviso -->
+      <div class="flex items-start gap-2 border-t border-zinc-100 pt-4 text-xs leading-5 text-zinc-500">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+          class="mt-0.5 shrink-0">
+          <rect x="5" y="10" width="14" height="11" rx="2"/>
+          <path d="M8 10V7a4 4 0 1 1 8 0v3"/>
+        </svg>
+        <p>
+          Esta versão permite capturar e visualizar uma imagem. O envio, o armazenamento e o vínculo com o motorista ou veículo ainda precisam ser integrados ao sistema da frota.
+        </p>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="border-t border-zinc-200 bg-zinc-950 px-5 py-5 text-center">
+      <p class="font-heading text-sm font-extrabold text-white">
+        TaxiFrota<span class="text-yellow-400">App</span>
+      </p>
+      <p class="mt-1 text-xs text-zinc-400">
+        Registro de quilometragem da frota
+      </p>
+    </footer>
+  </div>
+
+</body>
+</html>
