@@ -199,13 +199,20 @@ async function abrirCamera(
       source: origem
     });
 
-    if (!foto.webPath) {
+    const caminhoFoto =
+      foto.webPath ??
+      foto.path ??
+      (foto.base64String
+        ? `data:image/jpeg;base64,${foto.base64String}`
+        : null);
+
+    if (!caminhoFoto) {
       throw new Error('Não foi possível acessar a imagem.');
     }
 
-    fotoSelecionada = foto.webPath;
+    fotoSelecionada = caminhoFoto;
 
-    mostrarImagem(foto.webPath);
+    mostrarImagem(caminhoFoto);
 
     atualizarStatus(
       'Foto pronta para envio',
